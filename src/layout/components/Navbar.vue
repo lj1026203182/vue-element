@@ -5,6 +5,10 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <template v-if="device!=='mobile'">
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+      </template>
+      
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img src="https://csdnimg.cn/cdn/content-toolbar/csdn-logo_.png?v=20190924.1" class="user-avatar">
@@ -29,16 +33,18 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import Screenfull from '@/components/Screenfull'
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger
+    Hamburger,
+    Screenfull
   },
   computed: {
     ...mapGetters([
       'sidebar',
-      'avatar'
+      'device'
     ])
   },
   methods: {
