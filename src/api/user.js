@@ -2,7 +2,15 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/5e8846e731000083003f48b7',
+    url: '/vue-admin-template/user/login',
+    method: 'post',
+    data
+  })
+}
+
+export function generateRoutes(data) {
+  return request({
+    url: '/vue-admin-template/user/info',
     method: 'post',
     data
   })

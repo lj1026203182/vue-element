@@ -1,4 +1,5 @@
 import router from './router'
+import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import getPageTitle from '@/utils/get-page-title'
@@ -18,13 +19,8 @@ router.beforeEach(async (to, from, next) => {
   const isLogin = sessionStorage.userInfo
 
   if (isLogin) {
-    if (to.path === '/login') {
-      // if is logged in, redirect to the home page
-      next({ path: '/' })
-      NProgress.done()
-    } else {
-      next()
-    }
+    next()
+    NProgress.done()
   } else {
     /* has no login*/
 

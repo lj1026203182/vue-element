@@ -1,13 +1,18 @@
-import { login, logout, getInfo } from '@/api/user'
-import { resetRouter } from '@/router'
+import { login, generateRoutes } from '@/api/user'
+import { resetRouter,constantRoutes } from '@/router'
+import Layout from '@/layout'
 
 const state = {
-  userInfo: {}
+  routes: [],
+  userInfo: sessionStorage.userInfo ? JSON.parse(sessionStorage.userInfo) : {},
 }
 
 const mutations = {
   SET_USERINFO: (state, userInfo) => {
     state.userInfo = userInfo
+  },
+  SET_ROUTES: (state, routes) => {
+    state.routes = constantRoutes.concat(routes || [])
   }
 }
 
@@ -21,6 +26,23 @@ const actions = {
         sessionStorage.setItem('userInfo', JSON.stringify(data))
         commit('SET_USERINFO', data)
         resolve()
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
+  // get user info
+  generateRoutes({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      generateRoutes(state.userInfo).then(response => {
+        const { data } = response
+        data.forEach(role => {
+          role.component = Layout
+        });
+  
+        commit('SET_ROUTES', data)
+        resolve(data)
       }).catch(error => {
         reject(error)
       })
