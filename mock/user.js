@@ -8,19 +8,37 @@ const tokens = {
   }
 }
 
-const users = {
-  'admin-token': {
-    roles: ['admin'],
-    introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin'
-  },
-  'editor-token': {
-    roles: ['editor'],
-    introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal Editor'
-  }
+const permissons = {
+  'admin-token': [
+    {
+      path: 'external-link',
+      meta: { title: '外链', icon: 'example' },
+      children: [
+        {
+          path: 'https://github.com/PanJiaChen/vue-element-admin',
+          name: '1',
+          meta: { title: 'External Link1', icon: 'link' }
+        },
+        {
+          path: 'https://www.baidu.com',
+          name: '2',
+          meta: { title: 'External Link2', icon: 'link' }
+        }
+      ]
+    },
+  ],
+  'editor-token': [
+    {
+      path: 'external-link',
+      meta: { title: '外链', icon: 'example' },
+      children: [
+        {
+          path: 'https://github.com/PanJiaChen/vue-element-admin',
+          meta: { title: 'External Link', icon: 'link' }
+        }
+      ]
+    },
+  ]
 }
 
 export default [
@@ -52,19 +70,11 @@ export default [
     url: '/vue-admin-template/user/info\.*',
     type: 'post',
     response: config => {
+      const { username } = config.body
+      const permisson = permissons[username]
       return {
         code: 0,
-        data: [
-          {
-            path: 'external-link',
-            children: [
-              {
-                path: 'https://github.com/PanJiaChen/vue-element-admin',
-                meta: { title: 'External Link', icon: 'link' }
-              }
-            ]
-          },
-        ]
+        data: permisson
       }
     }
   },

@@ -1,5 +1,5 @@
 import { login, generateRoutes } from '@/api/user'
-import { resetRouter,constantRoutes } from '@/router'
+import { resetRouter, constantRoutes } from '@/router'
 import Layout from '@/layout'
 
 const state = {
@@ -35,12 +35,12 @@ const actions = {
   // get user info
   generateRoutes({ commit, state }) {
     return new Promise((resolve, reject) => {
-      generateRoutes(state.userInfo).then(response => {
+      generateRoutes({ username: state.userInfo.token }).then(response => {
         const { data } = response
         data.forEach(role => {
           role.component = Layout
         });
-  
+
         commit('SET_ROUTES', data)
         resolve(data)
       }).catch(error => {

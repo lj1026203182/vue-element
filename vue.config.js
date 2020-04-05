@@ -29,6 +29,15 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: false,
   productionSourceMap: false,
+  devServer: {
+    port: port,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    before: require('./mock/mock-server.js')
+  },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.

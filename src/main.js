@@ -1,10 +1,11 @@
+import 'babel-polyfill'
+import promise from 'es6-promise';
 import Vue from 'vue'
 
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
 
@@ -15,10 +16,15 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-if (process.env.NODE_ENV !== 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+const { mockXHR } = require('../mock')
+mockXHR()
+
+import adaptive from '@/directive/el-table'
+// Vue.directive('el-height-adaptive-table', adaptive)
+Vue.use(adaptive)
+
+
+promise.polyfill();
 
 Vue.use(ElementUI)
 

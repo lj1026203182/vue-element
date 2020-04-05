@@ -57,12 +57,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard',affix: true }
+      path: 'home',
+      name: '首页',
+      component: () => import('@/views/home/index'),
+      meta: { title: '首页', icon: 'dashboard', affix: true }
     }]
   },
 
@@ -71,13 +71,13 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'example' },
+    meta: { title: '表格', icon: 'table' },
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '表格', icon: 'table' }
       },
     ]
   },
@@ -90,26 +90,13 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: '表单', icon: 'form' }
       }
     ]
   },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
-]
-
-export const asyncRoutes = [
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
-      {
-        path: 'https://www.baidu.com',
-        meta: { title: 'External Link', icon: 'link',roles:'admin' }
-      }
-    ]
-  },
 ]
 
 const createRouter = () => new Router({
