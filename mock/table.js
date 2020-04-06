@@ -14,14 +14,16 @@ const data = Mock.mock({
 export default [
   {
     url: '/vue-admin-template/table/list',
-    type: 'get',
+    type: 'post',
     response: config => {
       const items = data.items
+      let { page, pageSize } = config.body
+
       return {
         code: 0,
         data: {
           total: items.length,
-          items: items
+          items: items.filter((item, index) => page === (parseInt(index / pageSize) + 1))
         }
       }
     }

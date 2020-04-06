@@ -10,10 +10,14 @@
       border
       highlight-current-row
       height="400"
+      stripe
+      :row-key="getRowKeys"
       v-el-height-adaptive-table="{bottomOffset: 100}"
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column type="selection" :reserve-selection="true" width="60" align="center"></el-table-column>
       <el-table-column align="center" label="ID" width="95">
-        <template slot-scope="scope">{{ scope.$index }}</template>
+        <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
       <el-table-column label="Title">
         <template slot-scope="scope">{{ scope.row.title }}</template>
@@ -26,15 +30,21 @@
       <el-table-column label="Pageviews" width="110" align="center">
         <template slot-scope="scope">{{ scope.row.pageviews }}</template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
       <el-table-column align="center" prop="created_at" label="Display_time" width="200">
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column
+        class-name="status-col"
+        fixed="right"
+        label="Status"
+        width="110"
+        align="center"
+      >
+        <template slot-scope="scope">
+          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
     </el-table>
@@ -67,11 +77,14 @@ export default {
   components: { Pagination },
   data() {
     return {
-      list: null,
+      list: [],
       listLoading: true,
       total: 0,
       page: 1,
-      pageSize: 10
+      pageSize: 10,
+      getRowKeys(row) {
+        return row.id;
+      }
     };
   },
   created() {
@@ -95,6 +108,9 @@ export default {
     handleFilter() {
       this.page = 1;
       this.fetchData();
+    },
+    handleSelectionChange(val) {
+      console.log(val);
     }
   }
 };

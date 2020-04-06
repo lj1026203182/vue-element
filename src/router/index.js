@@ -60,7 +60,7 @@ export const constantRoutes = [
     redirect: '/home',
     children: [{
       path: 'home',
-      name: '首页',
+      name: 'Home',
       component: () => import('@/views/home/index'),
       meta: { title: '首页', icon: 'dashboard', affix: true }
     }]
@@ -71,7 +71,6 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: '表格', icon: 'table' },
     children: [
       {
         path: 'table',
@@ -92,6 +91,19 @@ export const constantRoutes = [
         component: () => import('@/views/form/index'),
         meta: { title: '表单', icon: 'form' }
       }
+    ]
+  },
+
+  {
+    path: '/clipboard',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Clipboard',
+        component: () => import('@/views/clipboard/index'),
+        meta: { title: '剪切板', icon: 'clipboard' }
+      },
     ]
   },
 

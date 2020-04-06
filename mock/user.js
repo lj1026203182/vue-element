@@ -16,12 +16,10 @@ const permissons = {
       children: [
         {
           path: 'https://github.com/PanJiaChen/vue-element-admin',
-          name: '1',
           meta: { title: 'External Link1', icon: 'link' }
         },
         {
           path: 'https://www.baidu.com',
-          name: '2',
           meta: { title: 'External Link2', icon: 'link' }
         }
       ]
