@@ -9,7 +9,6 @@
 
 <script>
 import LineChart from "@/components/Echarts/LineChart";
-
 export default {
   name: "Home",
   components: {
@@ -35,5 +34,21 @@ export default {
     font-size: 30px;
     line-height: 46px;
   }
+}
+.edit {
+  height: 40px;
+  width: 200px;
+  border: 1px solid lightblue;
+}
+.edit[contenteditable] {
+  color: red;
+  overflow: auto;
+}
+.edit[contenteditable]::-webkit-scrollbar {
+  display: none;
+}
+#videoElement {
+  width: 100px;
+  height: 100px;
 }
 </style>
