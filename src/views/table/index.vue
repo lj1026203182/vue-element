@@ -1,7 +1,17 @@
 <template>
   <div class="app-container">
-    <el-card shadow="hover" body-style="{padding: '10px'}" style="margin-bottom:12px">
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+    <el-card
+      shadow="hover"
+      body-style="{padding: '10px'}"
+      style="margin-bottom:12px"
+    >
+      <el-button
+        class="filter-item"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+        >搜索</el-button
+      >
     </el-card>
     <el-table
       v-loading="listLoading"
@@ -12,10 +22,15 @@
       height="400"
       stripe
       :row-key="getRowKeys"
-      v-el-height-adaptive-table="{bottomOffset: 100}"
+      v-el-height-adaptive-table="{ bottomOffset: 100 }"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" :reserve-selection="true" width="60" align="center"></el-table-column>
+      <el-table-column
+        type="selection"
+        :reserve-selection="true"
+        width="60"
+        align="center"
+      ></el-table-column>
       <el-table-column align="center" label="ID" width="95">
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
@@ -30,7 +45,12 @@
       <el-table-column label="Pageviews" width="110" align="center">
         <template slot-scope="scope">{{ scope.row.pageviews }}</template>
       </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
+      <el-table-column
+        align="center"
+        prop="created_at"
+        label="Display_time"
+        width="200"
+      >
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.display_time }}</span>
@@ -44,13 +64,15 @@
         align="center"
       >
         <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
+          <el-tag :type="scope.row.status | statusFilter">{{
+            scope.row.status
+          }}</el-tag>
         </template>
       </el-table-column>
     </el-table>
 
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       :page.sync="page"
       :limit.sync="pageSize"
@@ -99,7 +121,7 @@ export default {
       }).then(response => {
         this.list = response.data.items;
         this.total = response.data.total;
-
+        console.log(response);
         setTimeout(() => {
           this.listLoading = false;
         }, 1.5 * 1000);

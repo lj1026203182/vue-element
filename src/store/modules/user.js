@@ -36,6 +36,7 @@ const actions = {
   generateRoutes({ commit, state }) {
     return new Promise((resolve, reject) => {
       generateRoutes({ username: state.userInfo.token }).then(response => {
+        console.log(response);
         const { data } = response
         data.forEach(role => {
           role.component = Layout
