@@ -1,19 +1,25 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <sidebar class="sidebar-container" />
-    <div class="main-container">
-      <div :class="{'fixed-header':fixedHeader}">
-        <navbar />
-        <tags-view />
+    <div class="layout-container-vertical fixed">
+      <div
+        v-if="device === 'mobile' && sidebar.opened"
+        class="drawer-bg"
+        @click="handleClickOutside"
+      />
+      <sidebar class="sidebar-container" />
+      <div class="main-container">
+        <div :class="{ 'fixed-header': fixedHeader }">
+          <navbar />
+          <tags-view />
+        </div>
+        <app-main />
       </div>
-      <app-main />
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain,TagsView } from "./components";
+import { Navbar, Sidebar, AppMain, TagsView } from "./components";
 import ResizeMixin from "./mixin/ResizeHandler";
 import { mapActions } from "vuex";
 import router from "../router";
@@ -49,7 +55,7 @@ export default {
   async created() {
     try {
       const accessRoutes = await this.generateRoutes();
-      
+
       router.addRoutes(accessRoutes);
     } catch (error) {
       await this.logout();
@@ -77,6 +83,9 @@ export default {
     position: fixed;
     top: 0;
   }
+}
+.layout-container-vertical.fixed{
+  padding-top: 96px;
 }
 .drawer-bg {
   background: #000;
